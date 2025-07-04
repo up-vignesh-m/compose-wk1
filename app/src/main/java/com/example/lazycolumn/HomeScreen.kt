@@ -1,5 +1,6 @@
 package com.example.lazycolumn
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,13 +25,16 @@ fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
 
             val ticks by viewModel.ticks.collectAsStateWithLifecycle()
 
-            LazyColumn(modifier = modifier.padding(innerPadding)) {
-                item {
-                    IndexTicker(ticks)
-                }
+            LazyColumn(
+                modifier = modifier.padding(innerPadding),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                item { IndexTicker(ticks) }
+
+                item { Header() }
 
                 items(10) { index ->
-
+                    ListItem(index)
                 }
 
                 items(indices) { item ->
@@ -40,9 +44,7 @@ fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
                     )
                 }
 
-                item {
-
-                }
+                item { Footer() }
 
 
             }
