@@ -10,20 +10,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.lazycolumn.ui.theme.AppTheme
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
     AppTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
+            val ticks by viewModel.ticks.collectAsStateWithLifecycle()
+
             LazyColumn(modifier = modifier.padding(innerPadding)) {
                 item {
-
+                    IndexTicker(ticks)
                 }
 
                 items(10) { index ->
@@ -31,7 +34,10 @@ fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
                 }
 
                 items(indices) { item ->
-
+                    IndexItem(
+                        index = item,
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
 
                 item {
@@ -43,19 +49,6 @@ fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
         }
     }
 }
-
-private val indices =
-    listOf(
-        Index("Nifty", 10000.0),
-        Index("Sensex", 50000.0),
-        Index("Bank Nifty", 20000.0)
-    )
-
-data class Index @OptIn(ExperimentalUuidApi::class) constructor(
-    val name: String,
-    val points: Double,
-    val id: String = Uuid.random().toString()
-)
 
 @Composable
 fun Footer(modifier: Modifier = Modifier) {
@@ -84,7 +77,7 @@ fun Header(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun IndexItem(index: Index, modifier: Modifier = Modifier) {
+fun IndexItem(index: IndexItem, modifier: Modifier = Modifier) {
     Surface(color = MaterialTheme.colorScheme.tertiaryContainer) {
         Text(
             index.name.uppercase() + ": " + index.points,
