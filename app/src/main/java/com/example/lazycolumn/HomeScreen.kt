@@ -38,10 +38,12 @@ fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
                 }
 
                 items(indices) { item ->
-                    IndexItem(
-                        index = item,
-                        modifier = Modifier.padding(8.dp)
-                    )
+                    Surface(color = MaterialTheme.colorScheme.tertiaryContainer) {
+                        IndexTickerItem(
+                            item = item,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
                 }
 
                 item { Footer() }
@@ -74,19 +76,6 @@ fun Header(modifier: Modifier = Modifier) {
                 .padding(16.dp),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Composable
-fun IndexItem(index: IndexItem, modifier: Modifier = Modifier) {
-    Surface(color = MaterialTheme.colorScheme.tertiaryContainer) {
-        Text(
-            index.name.uppercase() + ": " + index.points,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }

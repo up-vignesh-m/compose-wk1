@@ -73,7 +73,7 @@ private fun IndexTickerPreview() {
 }
 
 @Composable
-private fun IndexTickerItem(
+fun IndexTickerItem(
     item: IndexItem,
     modifier: Modifier = Modifier,
 ) {
