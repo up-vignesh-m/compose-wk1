@@ -18,12 +18,13 @@ class HomeViewModel : ViewModel() {
     private val _ticks = flow {
         while (true) {
             val updatedList = indices.mapIndexed { i, indexItem ->
-                val percentageChange = Random.nextDouble(-1.0, 1.0)
-                val points = indices[i].points - (indices[i].points * (percentageChange / 100))
+                val points = indexItem.points + Random.nextDouble(-10.0, 10.0)
+                val pointsChange = points - indices[i].points
+                val percentageChange = (pointsChange / indices[i].points) * 100.0
                 return@mapIndexed indexItem.copy(
                     percentageChange = percentageChange,
                     points = points,
-                    pointsChange = indices[i].points - points
+                    pointsChange = pointsChange
                 )
             }
             emit(updatedList)
