@@ -18,7 +18,7 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(viewModel: HomeViewModel, modifier: Modifier = Modifier) {
     AppTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             LazyColumn(modifier = modifier.padding(innerPadding)) {
