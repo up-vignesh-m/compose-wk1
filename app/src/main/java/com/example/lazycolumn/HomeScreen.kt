@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.lazycolumn.ui.theme.AppTheme
@@ -90,5 +91,37 @@ fun ListItem(index: Int, modifier: Modifier = Modifier) {
                 .padding(16.dp),
             style = MaterialTheme.typography.bodyLarge,
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewIndexItem() {
+    AppTheme {
+        IndexItem("NIFTY", 20000.0, 100.0, 10.0)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewListItem() {
+    AppTheme {
+        ListItem(index = 1)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHeader() {
+    AppTheme {
+        Header()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewFooter() {
+    AppTheme {
+        Footer()
     }
 }

@@ -51,7 +51,7 @@ fun IndexTicker(
     }
 }
 
-@Preview
+//@Preview
 @Composable
 private fun IndexTickerPreview() {
     AppTheme {
